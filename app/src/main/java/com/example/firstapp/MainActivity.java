@@ -2,6 +2,7 @@ package com.example.firstapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -16,16 +17,24 @@ import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import androidx.core.app.ActivityCompat;
+
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
-import com.example.firstapp.NetworkUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.example.firstapp.MyFileManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String CONFIG_FILE_NAME = "app_config.json";
     private WebView mWebView;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -42,29 +51,11 @@ public class MainActivity extends AppCompatActivity {
         mWebView.getSettings().setGeolocationEnabled(true); // to enable GPS location on web pages
         mWebView.setWebChromeClient(new WebChromeClient() {
 
-//            @Override
-//            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
-//                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
-//                } else {
-//                    LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//                    Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//                    if (location != null) {
-//                        String latitude = String.valueOf(location.getLatitude());
-//                        String longitude = String.valueOf(location.getLongitude());
-//                        String url = "https://www.example.com?lat=" + latitude + "&long=" + longitude;
-//                        mWebView.loadUrl(url);
-//                        callback.invoke(origin, true, true);
-//                    } else {
-//                        callback.invoke(origin, false, false);
-//                    }
-//                }
-//            }
-                @Override
-                public void onGeolocationPermissionsShowPrompt(String origin,
-                                                               GeolocationPermissions.Callback callback) {
-                    callback.invoke(origin, true, false);
-                }
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin,
+                                                           GeolocationPermissions.Callback callback) {
+                callback.invoke(origin, true, false);
+            }
         });
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -73,15 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     1);
         }
-//            @Override
-//            public void onPermissionRequest(PermissionRequest request) {
-//                if (request.getOrigin().toString().startsWith("https://")) {
-//                    request.grant(new String[]{Manifest.permission.ACCESS_FINE_LOCATION});
-//                } else {
-//                    super.onPermissionRequest(request);
-//                }
-//            }
-//        });
+
         // Check if location permission is granted
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Request location permission if not granted
@@ -143,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {

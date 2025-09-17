@@ -1,12 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.FirstApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/background_dark</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:navigationBarColor">@android:color/holo_blue_dark</item>
+        <item name="android:statusBarColor">@android:color/holo_blue_dark</item>
     </style>
 
     <style name="Theme.FirstApp" parent="Base.Theme.FirstApp" />
