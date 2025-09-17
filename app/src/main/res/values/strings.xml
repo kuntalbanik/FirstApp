@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FirstApp</string>
+<!--    <string name="app_name">Employee Task Tracker</string>-->
+    <string-array name="service_types_array">
+        <item>Installation</item>
+        <item>Maintenance</item>
+        <item>Repair</item>
+        <item>Inspection</item>
+    </string-array>
+
+    <string name="open_drawer">Open Navigation Drawer</string>
+    <string name="close_drawer">Close Navigation Drawer</string>
+</resources>

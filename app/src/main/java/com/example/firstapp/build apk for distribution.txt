@@ -1,0 +1,39 @@
+Step 1: Open the wizard
+Open your project in Android Studio.
+In the menu bar, navigate to Build > Generate Signed Bundle / APK....
+
+
+Step 2: Choose your build format
+In the dialog that appears, you will be prompted to choose between an Android App Bundle (AAB) and an APK. 
+Android App Bundle (Recommended): This is the modern, optimized format for publishing to the Google Play Store. Google Play then generates and serves optimized APKs to users based on their device specifications.
+APK: This is the traditional format and is suitable for distributing your app through other channels, such as your own website or internal testing. For this process, select APK.
+
+
+Step 3: Create a new keystore (if you don't have one)
+If this is the first time you are building a release version of your app, you will need to create a new keystore. A keystore is a binary file that contains a private key for signing your app. 
+Click Create new... next to the "Key store path" field.
+In the "New Key Store" window, fill out the required information:
+Key store path: Choose a secure location on your computer to save the .jks keystore file. You must never lose this file.
+Password: Create a secure password for your keystore.
+Key:
+Alias: Enter an identifying name for your key.
+Password: Create a password for your key (you can reuse the keystore password).
+Validity (years): Set this to at least 25 years to ensure you can continue to update your app.
+Certificate: Provide some details about yourself or your organization. At a minimum, fill in the "First and Last Name" and "Country Code" fields.
+Click OK to save your new keystore.
+
+
+Step 4: Configure and finish
+Key store path, Key alias, and Passwords: Android Studio will automatically populate these fields with the information from the keystore you just created.
+Next: Click this button to proceed.
+Build Variants:
+Destination Folder: Choose where to save the final APK file.
+Build Type: Select release.
+Signature Versions: Select both V1 and V2 for maximum compatibility.
+Finish: Click this button to start the build process. 
+Once the build is complete, you will see a notification in Android Studio. You can click Locate to open the folder containing your app-release.apk file. 
+
+
+Important reminders
+Back up your keystore: The keystore file is essential for all future updates to your app. If you lose it, you will not be able to update your app on the Google Play Store. Back it up immediately.
+Save your passwords: Never lose the passwords for your keystore and key. 
